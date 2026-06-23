@@ -1,0 +1,217 @@
+@import "tufte";
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  article {
+    flex: 1;  // grows to fill remaining space, pushing footer to bottom
+  }
+}
+
+.sidenote,
+.marginnote {
+  code {
+    font-size: 0.85em;  // relative to the sidenote font size, not the root
+  }
+}
+
+nav.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+  font-size: 1.1rem;
+
+  a {
+    text-decoration: none;
+    color: inherit;
+
+    &:hover {
+      text-decoration: underline;
+    }
+
+    &:not(:last-child)::after {
+      content: "/";
+      margin: 0 0.5em;
+      color: #aaa;
+      display: inline-block;
+    }
+  }
+}
+
+
+.fullwidth > pre > code {
+    width: 90%;
+}
+
+// — Alert / Callout environments ---------------------------------------------
+
+blockquote[class^="markdown-alert"] {
+  border-left: 2px solid #f4c472;
+  margin: 1.5rem 0;
+  // margin-left: 1rem;
+  padding: 0.6rem 1rem;
+  border-top: none;
+  border-bottom: none;
+
+  // Label via pseudo-element
+  &::before {
+    display: block;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.4rem;
+  }
+
+  p:last-child { margin-bottom: 0; }
+}
+
+// Light theme — label colors, backgrounds, border colors
+.markdown-alert-note      {  &::before { content: "Note";      } }
+.markdown-alert-tip       {  &::before { content: "Tip";       } }
+.markdown-alert-important {  &::before { content: "Important"; } }
+.markdown-alert-warning   {  &::before { content: "Warning";   } }
+.markdown-alert-caution   {  &::before { content: "Caution";   } }
+
+
+// -- blog pagination and footer
+
+.blog-pagination {
+  width: 52.5%;
+  overflow: visible;       // let long titles bleed right past the column
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 2rem;
+  margin-top: 3rem;
+  padding-top: 1rem;
+  border-top: 1px solid #ccc;
+  margin-bottom: -5rem;        // flush against footer — no gap
+
+  a {
+    display: flex;
+    flex-direction: column; // title and arrow each on their own line
+    gap: 0.3rem;
+    text-decoration: none;
+    flex-shrink: 0;         // don't compress — overflow right instead
+    max-width: 45%;         // each side takes up to 45% before overflowing
+
+    svg { flex-shrink: 0; }
+
+    &:hover .pagination-title {
+      text-decoration: underline;
+    }
+  }
+
+  .pagination-next {
+    align-items: flex-end;  // right-align arrow and title
+    margin-left: auto;
+  }
+
+  .pagination-title {
+    font-size: 0.9rem;
+    line-height: 1.3;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    border-top-color: #444;
+  }
+}
+
+// Footer sits flush below pagination — no extra top border or margin
+.site-footer {
+  margin-top: 0;
+  padding-top: 0.8rem;
+  padding-bottom: 1.5rem;
+  font-size: 0.8rem;
+  color: #888;
+  width: 52.5%;
+  margin-right: auto;
+  padding-left: 12.5%;
+  border-top: 1px solid #ccc;
+
+  p {
+    margin: 0;
+    font-size: 1rem;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    border-top-color: #444;
+    color: #666;
+  }
+}
+
+
+// -- Math, KaTeX
+
+// KaTeX display math — center within text column
+.math {
+  overflow-x: auto;       // scroll if a formula is very wide
+  overflow-y: hidden;
+}
+
+.katex-display {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0.5rem 0;
+}
+
+// Inline math — no special sizing needed, flows with text
+span.math {
+  white-space: nowrap;
+}
+
+// Display math via shortcode
+div.math-display {
+  width: 52.5%;       // match text column
+  overflow-x: auto;   // scroll if formula is very wide
+  padding: 0.5rem 0;
+  font-size: 1.4rem;   // match Tufte's <p> font size
+}
+
+// Display math via $$...$$ directly in Markdown
+// KaTeX injects .katex-display inside the <p> — let the <p> constrain it
+p .katex-display {
+  overflow-x: auto;
+  margin: 0.5rem 0;
+}
+
+
+// -- Tags in post header
+
+.tags {
+  margin-left: 0.8em;
+  font-size: 0.95rem;
+
+  .tag {
+    font-size: 0.95rem;
+  }
+}
+
+.tag {
+  display: inline-block;
+  margin-right: 0.4em;
+  color: #888;
+  text-decoration: none;
+  font-size: 1.4rem;
+
+  &:hover {
+    color: inherit;
+    text-decoration: underline;
+  }
+}
+
+// Tag count on the /tags/ index page
+.tag-count {
+  font-size: 0.8rem;
+  color: #aaa;
+  margin-left: 0.3em;
+}
+
+@media (prefers-color-scheme: dark) {
+  .tag        { color: #666; }
+  .tag:hover  { color: #aaa; }
+  .tag-count  { color: #555; }
+}

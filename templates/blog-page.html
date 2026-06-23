@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}{{ page.title }} – {{ config.title }}{% endblock title %}
+
+{% block head %}
+  {% if page.extra.math %}
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+  {% endif %}
+{% endblock head %}
+
+{% block content %}
+<article>
+  <h1>{{ page.title }}</h1>
+  <p class="subtitle">
+    {{ page.date | date(format="%B %e, %Y") }}
+    {% if page.taxonomies.tags %}
+      <span class="tags tags-page">
+        {% for tag in page.taxonomies.tags | unique %}
+          <a href="{{ get_taxonomy_url(kind='tags', name=tag|lower) }}" class="tag">#{{ tag | lower }}</a>
+        {% endfor %}
+      </span>
+    {% endif %}
+  </p>
+
+  <section>
+    {{ page.content | safe }}
+  </section>
+
+<section class="blog-pagination">
+    {% if page.higher %}
+    <a href="{{ page.higher.permalink }}" class="pagination-prev">
+      <span class="pagination-title">{{ page.higher.title }}</span>
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <line x1="19" y1="12" x2="5" y2="12"/>
+        <polyline points="12 19 5 12 12 5"/>
+      </svg>
+    </a>
+    {% endif %}
+    {% if page.lower %}
+    <a href="{{ page.lower.permalink }}" class="pagination-next">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <line x1="5" y1="12" x2="19" y2="12"/>
+        <polyline points="12 5 19 12 12 19"/>
+      </svg>
+      <span class="pagination-title">{{ page.lower.title }}</span>
+    </a>
+    {% endif %}
+  </section>
+</article>
+{% endblock content %}
+
+{% block footer %}
+<footer class="site-footer">
+  <p>
+    &copy; {{ now() | date(format="%Y") }} <a href="/">{{ config.extra.author }}</a>
+    &middot; <a href="/blog/">Blog</a>
+    &middot; <a href="{{ get_url(path='atom.xml') }}">Feed</a>
+  </p>
+</footer>
+{% endblock footer %}

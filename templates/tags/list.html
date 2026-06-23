@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}Tags – {{ config.title }}{% endblock title %}
+
+{% block content %}
+<article>
+  <h1>Tags</h1>
+  <section>
+    {% for tag in terms %}
+      <p>
+        <a href="{{ tag.permalink }}" class="tag">#{{ tag.name | lower }}</a>
+        <span class="tag-count">{{ tag.pages | length }} post{% if tag.pages | length != 1 %}s{% endif %}</span>
+      </p>
+    {% endfor %}
+  </section>
+</article>
+{% endblock content %}

@@ -1,0 +1,23 @@
+{# vim: ft=jinja
+
+Blockquote (<blockquote>) is an inline quotation within the flow of your text,
+i.e., you're quoting something mid-article to support a point.
+
+Usage:
+
+  {% blockquote(author="Edward Tufte", source="The Visual Display of Quantitative Information") %}
+  Graphical excellence is the well-designed presentation of interesting data.
+  {% end %}
+
+#}
+
+<blockquote>
+  <p>{{ body }}</p>
+  {% if author or source %}
+  <footer>
+    {% if author %}{{ author }}{% endif %}
+    {% if author and source %}, {% endif %}
+    {% if source %}<cite>{{ source }}{% endif %}
+  </footer>
+  {% endif %}
+</blockquote>

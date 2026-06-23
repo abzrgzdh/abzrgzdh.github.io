@@ -1,0 +1,32 @@
+{# vim: ft=jinja
+
+Epigraph (.epigraph) is a quote placed at the very opening of a document or section, before the main text begins.
+It sets tone or theme.
+Tufte uses it the way academic books do -- a short passage from another work that frames what follows.
+It's rendered in italics with more breathing room, and the attribution is right-aligned beneath it.
+
+Usage:
+
+  {% epigraph(author="Richard Feynman") %}
+  The first principle is that you must not fool yourself — and you are the easiest person to fool.
+  {% end %}
+
+
+  {% epigraph() %}
+  It is a capital mistake to theorize before one has data.
+  {% end %}
+
+#}
+
+<div class="epigraph">
+  <blockquote>
+    <p>{{ body }}</p>
+    {% if author or source %}
+    <footer>
+      {% if author %}{{ author }}{% endif %}
+      {% if author and source %}, {% endif %}
+      {% if source %}{{ source }}{% endif %}
+    </footer>
+    {% endif %}
+  </blockquote>
+</div>

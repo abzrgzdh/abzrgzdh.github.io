@@ -1,0 +1,12 @@
+{# vim: ft=jinja
+
+Usage:
+
+  Display math:
+  {% dmath() %}
+  \int_0^\infty e^{-x^2} dx = \frac{\sqrt{\pi}}{2}
+  {% end %}
+
+#}
+
+<div class="math-display">\[{{ body }}\]</div>

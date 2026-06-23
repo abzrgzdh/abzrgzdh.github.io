@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block title %}{{ section.title }} – {{ config.title }}{% endblock title %}
+
+{% block content %}
+<article>
+  <h1>{{ section.title }}</h1>
+  {% if section.description %}
+    <p class="subtitle">{{ section.description }}</p>
+  {% endif %}
+
+  <section>
+    {% for page in section.pages %}
+    <p>
+      <span class="marginnote">{{ page.date | date(format="%B %e, %Y") }}</span>
+      <a href="{{ page.permalink }}">{{ page.title }}</a>
+      {% if page.description %}
+        — {{ page.description }}
+      {% endif %}
+    </p>
+    {% endfor %}
+  </section>
+</article>
+{% endblock content %}
+
+{% block footer %}
+<footer class="site-footer">
+  <p>
+    &copy; {{ now() | date(format="%Y") }} <a href="/">{{ config.extra.author }}</a>
+    &middot; <a href="/blog/">Blog</a>
+    &middot; <a href="{{ get_url(path='atom.xml') }}">Feed</a>
+  </p>
+</footer>
+{% endblock footer %}

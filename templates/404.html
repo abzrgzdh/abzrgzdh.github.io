@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}Page Not Found – {{ config.title }}{% endblock title %}
+
+{% block content %}
+<article>
+  <h1>404</h1>
+  <p class="subtitle">Page not found</p>
+  <section>
+    <p>The page you're looking for doesn't exist or has been moved. You might want to:</p>
+    <p>
+      <a href="/">Go home</a>
+      &nbsp;&middot;&nbsp;
+      <a href="/blog/">Browse the blog</a>
+      &nbsp;&middot;&nbsp;
+      <a href="/tags/">Browse by tag</a>
+    </p>
+  </section>
+</article>
+{% endblock content %}

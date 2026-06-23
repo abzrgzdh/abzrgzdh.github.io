@@ -1,0 +1,27 @@
+# The URL the site will be built for
+base_url = "https://abzrg.github.io"
+title = "Ali's Blog"
+
+# Whether to automatically compile all Sass files in the sass directory
+compile_sass = true
+
+# Whether to build a search index to be used later on by a JavaScript library
+build_search_index = false
+
+generate_feeds = true
+
+taxonomies = [
+  { name = "tags", feed = false }
+]
+
+[slugify]
+paths = "on"
+taxonomies = "on"   # ensures "C", "c", "C++" all normalize consistently
+anchors = "on"
+
+[markdown]
+github_alerts = true
+
+[extra]
+# Put all your custom variables here
+author = "Ali Bozorgzadeh"

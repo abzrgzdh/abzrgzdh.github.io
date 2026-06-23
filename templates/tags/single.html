@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}#{{ term.name }} – {{ config.title }}{% endblock title %}
+
+{% block content %}
+<article>
+  <h1>#{{ term.name | lower }}</h1>
+  <section>
+    {% for page in term.pages | unique(attribute="permalink") %}
+      <p>
+        <span class="marginnote">{{ page.date | date(format="%B %e, %Y") }}</span>
+        <a href="{{ page.permalink }}">{{ page.title }}</a>
+      </p>
+    {% endfor %}
+  </section>
+</article>
+{% endblock content %}

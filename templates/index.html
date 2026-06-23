@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+<article>
+  <h1>{{ config.title }}</h1>
+  <section>
+    {{ section.content | safe }}
+    <hr>
+    <nav class="links">
+      <a href="/blog/">blog</a>
+      <a href="https://abzrg.github.io/files/cv.pdf" target="_blank">résumé</a>
+      <a href="https://linkedin.com/in/alibozorgzadeh" target="_blank">linkedin</a>
+      <a href="https://github.com/abzrg" target="_blank">github</a>
+      <a href="https://scholar.google.com/citations?user=itt9zx8AAAAJ&hl=en" target="_blank">publications</a>
+      <a href="mailto:alixbozorgzadeh@gmail.com" target="_blank">email</a>
+    </nav>
+  </section>
+</article>
+{% endblock content %}

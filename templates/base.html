@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="{{ config.default_language }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>{% block title %}{{ config.title }}{% endblock title %}</title>
+
+  <link rel="stylesheet" href="{{ get_url(path='main.css') }}">
+
+  {% block rss %}
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="{{ get_url(path="atom.xml", trailing_slash=false) }}">
+  {% endblock %}
+
+  <link rel="icon" type="image/x-icon" href="{{ get_url(path='favicon.ico') }}">
+  <link rel="icon" type="image/png" sizes="16x16" href="{{ get_url(path='favicon-16x16.png') }}">
+  <link rel="icon" type="image/png" sizes="32x32" href="{{ get_url(path='favicon-32x32.png') }}">
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ get_url(path='apple-touch-icon.png') }}">
+  <link rel="manifest" href="{{ get_url(path='site.webmanifest') }}">
+
+  {% block head %}{% endblock head %}
+</head>
+<body>
+  {% block content %}{% endblock content %}
+  {% block footer %}{% endblock footer %}
+
+  {% if page.extra.math %}
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body, {
+      delimiters: [
+        { left: '$$',  right: '$$',  display: true  },
+        { left: '\\(', right: '\\)', display: false },
+        { left: '\\[', right: '\\]', display: true  }
+      ],
+      throwOnError: false
+    });"></script>
+  {% endif %}
+</body>
+</html>
