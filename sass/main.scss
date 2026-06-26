@@ -1,4 +1,20 @@
-@import "tufte";
+ @import "tufte";
+
+.marginnote > code {
+    font-size: 0.85rem;
+}
+
+/* ==========================================================================
+   Typography / Headings
+   ========================================================================== */
+
+h1, h2, h3, h4, h5, h6 {
+  max-width: 55%;
+}
+
+/* ==========================================================================
+   Layout: Base document structure
+   ========================================================================== */
 
 body {
   min-height: 100vh;
@@ -6,16 +22,50 @@ body {
   flex-direction: column;
 
   article {
-    flex: 1;  // grows to fill remaining space, pushing footer to bottom
+    flex: 1; // pushes footer down
   }
 }
 
-.sidenote,
-.marginnote {
-  code {
-    font-size: 0.85em;  // relative to the sidenote font size, not the root
+/* ==========================================================================
+   Code blocks (base desktop styles)
+   ========================================================================== */
+
+pre {
+  width: 55%;
+  margin: 0;
+  overflow-x: auto;
+}
+
+pre > code {
+  display: block;
+  width: 100%;
+  width: auto;
+  max-width: none;
+  margin: 0;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+pre > code {
+  @media (prefers-color-scheme: light) {
+    background-color: #efefe8;
   }
 }
+
+/* Inline code in text */
+.sidenote > code,
+.marginnote > code,
+li > code,
+p > code {
+  @media (prefers-color-scheme: light) {
+    background-color: #efefe8;
+  }
+  padding: 5px;
+}
+
+/* ==========================================================================
+   Links / Navigation
+   ========================================================================== */
 
 nav.links {
   display: flex;
@@ -40,22 +90,25 @@ nav.links {
   }
 }
 
+/* ==========================================================================
+   Fullwidth utility
+   ========================================================================== */
 
-.fullwidth > pre > code {
-    width: 90%;
+.fullwidth > pre {
+  width: 90%;
 }
 
-// — Alert / Callout environments ---------------------------------------------
+/* ==========================================================================
+   Alerts / Callouts
+   ========================================================================== */
 
 blockquote[class^="markdown-alert"] {
   border-left: 2px solid #f4c472;
   margin: 1.5rem 0;
-  // margin-left: 1rem;
   padding: 0.6rem 1rem;
   border-top: none;
   border-bottom: none;
 
-  // Label via pseudo-element
   &::before {
     display: block;
     font-weight: bold;
@@ -65,40 +118,46 @@ blockquote[class^="markdown-alert"] {
     margin-bottom: 0.4rem;
   }
 
-  p:last-child { margin-bottom: 0; }
+  p:last-child {
+    margin-bottom: 0;
+  }
 }
 
-// Light theme — label colors, backgrounds, border colors
-.markdown-alert-note      {  &::before { content: "Note";      } }
-.markdown-alert-tip       {  &::before { content: "Tip";       } }
-.markdown-alert-important {  &::before { content: "Important"; } }
-.markdown-alert-warning   {  &::before { content: "Warning";   } }
-.markdown-alert-caution   {  &::before { content: "Caution";   } }
+.markdown-alert-note      { &::before { content: "Note"; } }
+.markdown-alert-tip       { &::before { content: "Tip"; } }
+.markdown-alert-important { &::before { content: "Important"; } }
+.markdown-alert-warning   { &::before { content: "Warning"; } }
+.markdown-alert-caution   { &::before { content: "Caution"; } }
 
-
-// -- blog pagination and footer
+/* ==========================================================================
+   Blog pagination
+   ========================================================================== */
 
 .blog-pagination {
   width: 52.5%;
-  overflow: visible;       // let long titles bleed right past the column
+  overflow: visible;
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
   gap: 2rem;
+
   margin-top: 3rem;
   padding-top: 1rem;
   border-top: 1px solid #ccc;
-  margin-bottom: -5rem;        // flush against footer — no gap
+
+  margin-bottom: -5rem;
 
   a {
     display: flex;
-    flex-direction: column; // title and arrow each on their own line
+    flex-direction: column;
     gap: 0.3rem;
     text-decoration: none;
-    flex-shrink: 0;         // don't compress — overflow right instead
-    max-width: 45%;         // each side takes up to 45% before overflowing
+    flex-shrink: 0;
+    max-width: 45%;
 
-    svg { flex-shrink: 0; }
+    svg {
+      flex-shrink: 0;
+    }
 
     &:hover .pagination-title {
       text-decoration: underline;
@@ -106,7 +165,7 @@ blockquote[class^="markdown-alert"] {
   }
 
   .pagination-next {
-    align-items: flex-end;  // right-align arrow and title
+    align-items: flex-end;
     margin-left: auto;
   }
 
@@ -120,16 +179,22 @@ blockquote[class^="markdown-alert"] {
   }
 }
 
-// Footer sits flush below pagination — no extra top border or margin
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+
 .site-footer {
   margin-top: 0;
   padding-top: 0.8rem;
   padding-bottom: 1.5rem;
+
   font-size: 0.8rem;
   color: #888;
+
   width: 52.5%;
   margin-right: auto;
   padding-left: 12.5%;
+
   border-top: 1px solid #ccc;
 
   p {
@@ -143,12 +208,12 @@ blockquote[class^="markdown-alert"] {
   }
 }
 
+/* ==========================================================================
+   Math (KaTeX)
+   ========================================================================== */
 
-// -- Math, KaTeX
-
-// KaTeX display math — center within text column
 .math {
-  overflow-x: auto;       // scroll if a formula is very wide
+  overflow-x: auto;
   overflow-y: hidden;
 }
 
@@ -158,28 +223,25 @@ blockquote[class^="markdown-alert"] {
   padding: 0.5rem 0;
 }
 
-// Inline math — no special sizing needed, flows with text
 span.math {
   white-space: nowrap;
 }
 
-// Display math via shortcode
 div.math-display {
-  width: 52.5%;       // match text column
-  overflow-x: auto;   // scroll if formula is very wide
+  width: 52.5%;
+  overflow-x: auto;
   padding: 0.5rem 0;
-  font-size: 1.4rem;   // match Tufte's <p> font size
+  font-size: 1.4rem;
 }
 
-// Display math via $$...$$ directly in Markdown
-// KaTeX injects .katex-display inside the <p> — let the <p> constrain it
 p .katex-display {
   overflow-x: auto;
   margin: 0.5rem 0;
 }
 
-
-// -- Tags in post header
+/* ==========================================================================
+   Tags
+   ========================================================================== */
 
 .tags {
   margin-left: 0.8em;
@@ -203,15 +265,74 @@ p .katex-display {
   }
 }
 
-// Tag count on the /tags/ index page
 .tag-count {
   font-size: 0.8rem;
   color: #aaa;
   margin-left: 0.3em;
 }
 
+/* ==========================================================================
+   Responsive: mobile overrides
+   ========================================================================== */
+
+@media (max-width: 760px) {
+
+  header,
+  .meta,
+  #pagination,
+  body > footer {
+    width: 100%;
+  }
+
+  h1 {
+    max-width: 100%;
+  }
+
+  pre {
+    width: 100%;
+  }
+
+  pre > code {
+    width: 100%;
+  }
+
+  .fullwidth > pre {
+    width: 100%;
+  }
+
+  .fullwidth > pre > code {
+    margin-left: 0;
+    width: 100%;
+  }
+}
+
+
+/* ==========================================================================
+   Dark mode (global)
+   ========================================================================== */
+
 @media (prefers-color-scheme: dark) {
-  .tag        { color: #666; }
-  .tag:hover  { color: #aaa; }
-  .tag-count  { color: #555; }
+
+  pre {
+    background-color: #1f1f18 !important;
+  }
+
+  .sidenote > code,
+  .marginnote > code,
+  li > code,
+  p > code {
+    background-color: #282820;
+  }
+
+  .tag {
+    color: #666;
+
+    &:hover {
+      color: #aaa;
+    }
+  }
+
+  .tag-count {
+    color: #555;
+  }
 }
