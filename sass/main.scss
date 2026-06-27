@@ -48,7 +48,7 @@ pre > code {
 
 pre > code {
   @media (prefers-color-scheme: light) {
-    background-color: #efefe8;
+    background-color: #f8f8f0;
   }
 }
 
@@ -58,7 +58,7 @@ pre > code {
 li > code,
 p > code {
   @media (prefers-color-scheme: light) {
-    background-color: #efefe8;
+    background-color: #f0f0e8;
   }
   padding: 5px;
 }
@@ -324,14 +324,14 @@ p .katex-display {
 @media (prefers-color-scheme: dark) {
 
   pre {
-    background-color: #1f1f18 !important;
+    background-color: #0f0f08 !important;
   }
 
   .sidenote > code,
   .marginnote > code,
   li > code,
   p > code {
-    background-color: #282820;
+    background-color: #081000;
   }
 
   .tag {
