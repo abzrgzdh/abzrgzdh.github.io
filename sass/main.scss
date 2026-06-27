@@ -134,7 +134,12 @@ blockquote[class^="markdown-alert"] {
    ========================================================================== */
 
 .blog-pagination {
-  width: 52.5%;
+  width: 55%;
+
+  @media (max-width: 760px) {
+    width: 100%;
+  }
+
   overflow: visible;
   display: flex;
   justify-content: space-between;
@@ -192,6 +197,11 @@ blockquote[class^="markdown-alert"] {
   color: #888;
 
   width: 52.5%;
+
+  @media (max-width: 760px) {
+    width: 87.5%;
+  }
+
   margin-right: auto;
   padding-left: 12.5%;
 
