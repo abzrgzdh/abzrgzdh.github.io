@@ -86,7 +86,6 @@ $ gh run list --json databaseId
 Now we need to turn that JSON into a plain list of IDs.
 The easiest tool to pipe the JSON output into [`jq`](https://jqlang.org/).
 {% marginnote(id="mn-3") %}
-<br><br>
 <code>.</code> refers to the root JSON value;
 <code>[]</code> iterates over every element in the array; and
 <code>.databaseId</code> selects the <code>databaseId</code> property from each object.
@@ -102,7 +101,6 @@ $ gh run list --json databaseId | jq '.[].databaseId'
 
 Finally, we can go ahead and pipe the ids to `xargs` to get deleted one-by-one.
 {% marginnote(id="mn-4") %}
-<br><br>
 The <code>-n1</code> option tells <code>xargs</code> to invoke <code>gh run delete</code> once for each input line.
 {% end %}
 
