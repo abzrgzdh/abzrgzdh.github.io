@@ -1,11 +1,7 @@
- @import "tufte";
-
-.marginnote > code {
-    font-size: 0.85rem;
-}
+@import "tufte";
 
 /* ==========================================================================
-   Typography / Headings
+   Typography
    ========================================================================== */
 
 h1, h2, h3, h4, h5, h6 {
@@ -13,7 +9,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* ==========================================================================
-   Layout: Base document structure
+   Layout
    ========================================================================== */
 
 body {
@@ -22,45 +18,172 @@ body {
   flex-direction: column;
 
   article {
-    flex: 1; // pushes footer down
+    flex: 1;
   }
 }
 
 /* ==========================================================================
-   Code blocks (base desktop styles)
+   Code blocks
    ========================================================================== */
 
-pre {
+.code-wrap {
   width: 55%;
+  margin-top: 0.5em;
+}
+
+pre {
+  width: 100%;   // fills .code-wrap
   margin: 0;
+  // margin-top: 0.5em;
   overflow-x: auto;
+  line-height: 1.0;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
 }
 
 pre > code {
   display: block;
-  width: 100%;
-  width: auto;
+  width: max-content;   // grows with long lines
+  min-width: 100%;      // never narrower than pre
   max-width: none;
   margin: 0;
-  padding: 1rem;
+  padding: 0;
   box-sizing: border-box;
-}
+  line-height: 0;
 
-pre > code {
   @media (prefers-color-scheme: light) {
     background-color: #f8f8f0;
   }
 }
 
-/* Inline code in text */
+// Ribbon
+.code-ribbon {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.3rem 0.8rem;
+  font-size: 0.75rem;
+  font-family: monospace;
+  background-color: #e4e4dc;
+  color: #888;
+
+  @media (prefers-color-scheme: dark) {
+    background-color: #1a1a12;
+    color: #555;
+  }
+}
+
+.code-lang {
+  letter-spacing: 0.03em;
+}
+
+.code-copy {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.2rem;
+  display: flex;
+  align-items: center;
+  color: #aaa;
+  transition: color 0.15s;
+
+  &:hover { color: #333; }
+  &.copied { color: #3a9c6e; }
+
+  @media (prefers-color-scheme: dark) {
+    &:hover { color: #ccc; }
+    &.copied { color: #4ab87e; }
+  }
+}
+
+// Fullwidth — target wrapper now
+.fullwidth > .code-wrap {
+  width: 90%;
+}
+
+.giallo-l {
+  display: block;
+  min-height: 1lh;
+  max-width: 100%;
+  padding: 0 1rem;
+  padding-top: 0.9em;
+  padding-bottom: 0.9em;
+  margin: 0;
+}
+
+.giallo-l[style*="background-color"] {
+  border-left: 2px solid #f4c472;
+  @media (prefers-color-scheme: light) {
+    background-color: #e8e8e0 !important;
+  }
+}
+
+/* ==========================================================================
+   Code block line numbering
+   ========================================================================== */
+
+pre.z-code {
+  padding: 0;
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  td:first-child {
+    user-select: none;
+    text-align: right;
+    padding: 0 1em 0 0.5em;
+    min-width: 2em;
+    color: #aaa;
+    border-right: 1px solid #ddd;
+
+    @media (prefers-color-scheme: dark) {
+      color: #555;
+      border-right-color: #333;
+    }
+  }
+
+  td:last-child {
+    padding: 0;
+    width: 100%;
+  }
+}
+
+.giallo-ln {
+  user-select: none;
+  padding: 0 0.4em;
+  min-width: 3ch;
+  text-align: right;
+  opacity: 0.8;
+}
+
+/* ==========================================================================
+   Inline code
+   ========================================================================== */
+
 .sidenote > code,
 .marginnote > code,
 li > code,
 p > code {
+  padding: 5px;
+
   @media (prefers-color-scheme: light) {
     background-color: #f0f0e8;
   }
-  padding: 5px;
+}
+
+.sidenote > code,
+.marginnote > code {
+  font-size: 0.85em;
+}
+
+/* ==========================================================================
+   Fullwidth utility
+   ========================================================================== */
+
+.fullwidth > pre {
+  width: 90%;
 }
 
 /* ==========================================================================
@@ -88,14 +211,6 @@ nav.links {
       display: inline-block;
     }
   }
-}
-
-/* ==========================================================================
-   Fullwidth utility
-   ========================================================================== */
-
-.fullwidth > pre {
-  width: 90%;
 }
 
 /* ==========================================================================
@@ -135,21 +250,14 @@ blockquote[class^="markdown-alert"] {
 
 .blog-pagination {
   width: 55%;
-
-  @media (max-width: 760px) {
-    width: 100%;
-  }
-
   overflow: visible;
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
   gap: 2rem;
-
   margin-top: 3rem;
   padding-top: 1rem;
   border-top: 1px solid #ccc;
-
   margin-bottom: -5rem;
 
   a {
@@ -160,9 +268,7 @@ blockquote[class^="markdown-alert"] {
     flex-shrink: 0;
     max-width: 45%;
 
-    svg {
-      flex-shrink: 0;
-    }
+    svg { flex-shrink: 0; }
 
     &:hover .pagination-title {
       text-decoration: underline;
@@ -182,6 +288,10 @@ blockquote[class^="markdown-alert"] {
   @media (prefers-color-scheme: dark) {
     border-top-color: #444;
   }
+
+  @media (max-width: 760px) {
+    width: 100%;
+  }
 }
 
 /* ==========================================================================
@@ -192,24 +302,20 @@ blockquote[class^="markdown-alert"] {
   margin-top: 0;
   padding-top: 0.8rem;
   padding-bottom: 1.5rem;
-
   font-size: 0.8rem;
   color: #888;
-
   width: 52.5%;
-
-  @media (max-width: 760px) {
-    width: 87.5%;
-  }
-
   margin-right: auto;
   padding-left: 12.5%;
-
   border-top: 1px solid #ccc;
 
   p {
     margin: 0;
     font-size: 1rem;
+  }
+
+  @media (max-width: 760px) {
+    width: 87.5%;
   }
 
   @media (prefers-color-scheme: dark) {
@@ -222,19 +328,10 @@ blockquote[class^="markdown-alert"] {
    Math (KaTeX)
    ========================================================================== */
 
-.math {
-  overflow-x: auto;
-  overflow-y: hidden;
-}
-
-.katex-display {
-  overflow-x: auto;
-  overflow-y: hidden;
-  padding: 0.5rem 0;
-}
-
 span.math {
   white-space: nowrap;
+  overflow-x: auto;
+  overflow-y: hidden;
 }
 
 div.math-display {
@@ -244,8 +341,10 @@ div.math-display {
   font-size: 1.4rem;
 }
 
-p .katex-display {
+.katex-display {
   overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0.5rem 0;
   margin: 0.5rem 0;
 }
 
@@ -256,10 +355,6 @@ p .katex-display {
 .tags {
   margin-left: 0.8em;
   font-size: 0.95rem;
-
-  .tag {
-    font-size: 0.95rem;
-  }
 }
 
 .tag {
@@ -267,7 +362,7 @@ p .katex-display {
   margin-right: 0.4em;
   color: #888;
   text-decoration: none;
-  font-size: 1.4rem;
+  font-size: 0.95rem;
 
   &:hover {
     color: inherit;
@@ -282,47 +377,49 @@ p .katex-display {
 }
 
 /* ==========================================================================
-   Responsive: mobile overrides
+   Sidenote / marginnote offset
+   ========================================================================== */
+
+@media screen and (min-width: 760px) {
+  .sidenote,
+  .marginnote {
+    margin-top: var(--note-offset, 0);
+  }
+}
+
+/* ==========================================================================
+   Responsive: mobile
    ========================================================================== */
 
 @media (max-width: 760px) {
-
-  header,
-  .meta,
-  #pagination,
-  body > footer {
-    width: 100%;
-  }
-
   h1 {
     max-width: 100%;
   }
 
-  pre {
+  // pre {
+  //   width: 100%;
+  // }
+
+  .code-wrap {
     width: 100%;
   }
 
-  pre > code {
+  .fullwidth > .code-wrap {
     width: 100%;
   }
 
-  .fullwidth > pre {
-    width: 100%;
-  }
-
-  .fullwidth > pre > code {
-    margin-left: 0;
-    width: 100%;
-  }
+  // .fullwidth > pre,
+  // .fullwidth > pre > code {
+  //   width: 100%;
+  //   margin-left: 0;
+  // }
 }
 
-
 /* ==========================================================================
-   Dark mode (global)
+   Dark mode
    ========================================================================== */
 
 @media (prefers-color-scheme: dark) {
-
   pre {
     background-color: #0f0f08 !important;
   }
@@ -334,15 +431,6 @@ p .katex-display {
     background-color: #081000;
   }
 
-  .tag {
-    color: #666;
-
-    &:hover {
-      color: #aaa;
-    }
-  }
-
-  .tag-count {
-    color: #555;
-  }
+  .tag        { color: #666; &:hover { color: #aaa; } }
+  .tag-count  { color: #555; }
 }
