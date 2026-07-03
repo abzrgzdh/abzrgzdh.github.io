@@ -50,6 +50,10 @@ pre {
   line-height: 1.0;
   padding-top: 0.5em;
   padding-bottom: 0.5em;
+
+  @media (prefers-color-scheme: light) {
+    background-color: #f8f8f0 !important;
+  }
 }
 
 pre > code {
@@ -76,11 +80,11 @@ pre > code {
   font-size: 0.75rem;
   font-family: monospace;
   background-color: #e4e4dc;
-  color: #888;
+  color: #555;
 
   @media (prefers-color-scheme: dark) {
     background-color: #1a1a12;
-    color: #555;
+    color: #888;
   }
 }
 
