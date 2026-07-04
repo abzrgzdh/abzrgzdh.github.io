@@ -1,18 +1,14 @@
-@import "tufte";
-
 /* ==========================================================================
    Base reset
    ========================================================================== */
 
-*,
-*::before,
-*::after {
+html,
+body {
   margin: 0;
   padding: 0;
-  border: 0;
-  font-size: 100%;
-  vertical-align: baseline;
 }
+
+@import "tufte";
 
 /* ==========================================================================
    Typography
@@ -223,18 +219,19 @@ nav.links {
    Alerts / Callouts
    ========================================================================== */
 
+  ul,
+  ol {
+    margin-left: 0;
+    padding-left: 1.25rem;
+  }
+
+
 blockquote[class^="markdown-alert"] {
   border-left: 2px solid #f4c472;
   margin: 1.5rem 0;
   padding: 0.6rem 1rem;
   border-top: none;
   border-bottom: none;
-
-  ul,
-  ol {
-    margin-left: 0;
-    padding-left: 1.25rem;
-  }
 
   &::before {
     display: block;
