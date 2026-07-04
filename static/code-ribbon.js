@@ -8,89 +8,60 @@ document.addEventListener('DOMContentLoaded', () => {
     <polyline points="20 6 9 17 4 12"/>
   </svg>`;
 
+  const getCodeText = (code) =>
+    Array.from(code.querySelectorAll('.giallo-l'))
+      .map(line => {
+        const clone = line.cloneNode(true);
+        clone.querySelectorAll('.giallo-ln').forEach(el => el.remove());
+        return clone.textContent;
+      })
+      .join('\n')
+      .trimEnd();
+
   document.querySelectorAll('pre').forEach(pre => {
     const code = pre.querySelector('code');
     if (!code) return;
 
-    const lang = code.getAttribute('data-lang') || '';
-
-    // Wrap pre in a div
     const wrap = document.createElement('div');
     wrap.className = 'code-wrap';
     pre.parentNode.insertBefore(wrap, pre);
     wrap.appendChild(pre);
 
-    // Build ribbon
     const ribbon = document.createElement('div');
     ribbon.className = 'code-ribbon';
 
     const langSpan = document.createElement('span');
     langSpan.className = 'code-lang';
-    langSpan.textContent = lang;
+    langSpan.textContent = code.dataset.lang || '';
 
     const copyBtn = document.createElement('button');
     copyBtn.className = 'code-copy';
+    copyBtn.type = 'button';
     copyBtn.setAttribute('aria-label', 'Copy code');
     copyBtn.innerHTML = clipboardSVG;
 
-    copyBtn.addEventListener('click', () => {
-      // Exclude line numbers from copied text
-      const lines = code.querySelectorAll('.giallo-l');
-      let text;
-      if (lines.length > 0) {
-        text = Array.from(lines).map(l => {
-          const clone = l.cloneNode(true);
-          clone.querySelectorAll('.giallo-ln').forEach(ln => ln.remove());
-          return clone.textContent;
-        }).join('\n').trimEnd();
-      } else {
-        text = code.textContent.trim();
-      }
+    copyBtn.addEventListener('click', async () => {
+      const text = getCodeText(code);
 
-      navigator.clipboard.writeText(text).then(() => {
-        copyBtn.innerHTML = checkSVG;
-        copyBtn.classList.add('copied');
-        setTimeout(() => {
-          copyBtn.innerHTML = clipboardSVG;
-          copyBtn.classList.remove('copied');
-        }, 2000);
-      }).catch(() => {
-        // Fallback for older browsers
+      try {
+        await navigator.clipboard.writeText(text);
+      } catch {
         const ta = document.createElement('textarea');
         ta.value = text;
-        ta.style.cssText = 'position:fixed;opacity:0';
+        ta.style.cssText = 'position:fixed;opacity:0;left:-9999px;top:-9999px';
         document.body.appendChild(ta);
         ta.select();
         document.execCommand('copy');
-        document.body.removeChild(ta);
-        copyBtn.innerHTML = checkSVG;
-        setTimeout(() => { copyBtn.innerHTML = clipboardSVG; }, 2000);
-      });
-    });
+        ta.remove();
+      }
 
-    pre.addEventListener('copy', (e) => {
-      const selection = window.getSelection();
-      if (!selection || selection.isCollapsed) return;
+      copyBtn.innerHTML = checkSVG;
+      copyBtn.classList.add('copied');
 
-      const range = selection.getRangeAt(0);
-      const lines = code.querySelectorAll('.giallo-l');
-
-      // If there are no giallo lines, let the browser handle it normally
-      if (lines.length === 0) return;
-
-      const text = Array.from(lines)
-        .filter(line => range.intersectsNode(line))
-        .map(line => {
-          const clone = line.cloneNode(true);
-          // Remove line number elements from the copy
-          clone.querySelectorAll('.giallo-ln').forEach(ln => ln.remove());
-          // Strip the trailing \n Giallo adds to each line's text content
-          return clone.textContent.replace(/\n$/, '');
-        })
-        .join('\n');
-
-      e.clipboardData.setData('text/plain', text);
-      e.preventDefault();
+      setTimeout(() => {
+        copyBtn.innerHTML = clipboardSVG;
+        copyBtn.classList.remove('copied');
+      }, 2000);
     });
 
     ribbon.appendChild(langSpan);

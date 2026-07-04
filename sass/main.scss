@@ -1,5 +1,9 @@
 @import "tufte";
 
+/* ==========================================================================
+   Base reset
+   ========================================================================== */
+
 *,
 *::before,
 *::after {
@@ -42,35 +46,64 @@ body {
 }
 
 pre {
-  width: 100%;   // fills .code-wrap
+  width: 100%;
   margin: 0;
-  // margin-top: 0.5em;
   overflow-x: auto;
-  line-height: 1.0;
-  padding-top: 0.5em;
-  padding-bottom: 0.5em;
-
-  @media (prefers-color-scheme: light) {
-    background-color: #efefe8 !important;
-  }
+  overflow-y: hidden;
+  padding: 0.5em 0;
 }
 
 pre > code {
   display: block;
-  width: max-content;   // grows with long lines
-  min-width: 100%;      // never narrower than pre
+  width: max-content;
+  min-width: 100%;
   max-width: none;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  line-height: 0;
+  overflow: visible;
+  line-height: 1.5;
+}
 
+.giallo-l {
+  display: inline-block;
+  width: 100%;
+  min-height: 1lh;
+  position: relative;
+  padding: 0 1rem;
+  margin: 0;
+  line-height: 1.5;
+  box-sizing: border-box;
+}
+
+.giallo-ln {
+  display: inline-block;
+  min-width: 3ch;
+  text-align: right;
+  user-select: none;
+  margin-right: 0.75rem;
+  vertical-align: top;
+}
+
+.giallo-l[style*="background-color"] {
   @media (prefers-color-scheme: light) {
-    background-color: #efefe8;
+    background-color: #e8e8e0 !important;
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: #f4c472;
   }
 }
 
-// Ribbon
+
+/* Ribbon */
+
 .code-ribbon {
   display: flex;
   align-items: center;
@@ -87,6 +120,14 @@ pre > code {
   }
 }
 
+// .code-ribbon {
+//   display: flex;
+//   align-items: center;
+//   justify-content: space-between;
+//   padding: 0.3rem 0.8rem;
+// }
+
+
 .code-lang {
   letter-spacing: 0.03em;
 }
@@ -101,77 +142,33 @@ pre > code {
   color: #aaa;
   transition: color 0.15s;
 
-  &:hover { color: #333; }
-  &.copied { color: #3a9c6e; }
+  &:hover {
+    color: #333;
+  }
+
+  &.copied {
+    color: #3a9c6e;
+  }
 
   @media (prefers-color-scheme: dark) {
-    &:hover { color: #ccc; }
-    &.copied { color: #4ab87e; }
+    &:hover {
+      color: #ccc;
+    }
+
+    &.copied {
+      color: #4ab87e;
+    }
   }
 }
 
-// Fullwidth — target wrapper now
+/* Fullwidth */
+
 .fullwidth > .code-wrap {
   width: 90%;
 }
 
-.giallo-l {
-  display: block;
-  min-height: 1lh;
-  max-width: 100%;
-  padding: 0 1rem;
-  padding-top: 0.9em;
-  padding-bottom: 0.9em;
-  margin: 0;
-}
-
-.giallo-l[style*="background-color"] {
-  border-left: 2px solid #f4c472;
-  @media (prefers-color-scheme: light) {
-    background-color: #e8e8e0 !important;
-  }
-}
-
-/* ==========================================================================
-   Code block line numbering
-   ========================================================================== */
-
-pre.z-code {
-  padding: 0;
-
-  table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-
-  td:first-child {
-    user-select: none;
-    text-align: right;
-    padding: 0 1em 0 0.5em;
-    min-width: 2em;
-    color: #aaa;
-    border-right: 1px solid #ddd;
-
-    @media (prefers-color-scheme: dark) {
-      color: #555;
-      border-right-color: #333;
-    }
-  }
-
-  td:last-child {
-    padding: 0;
-    width: 100%;
-  }
-}
-
-.giallo-ln {
-  user-select: none;
-  padding: 0 0.4em;
-  min-width: 3ch;
-  text-align: right;
-  opacity: 0.8;
-  margin-right: 0.8em;
-  margin-left:-0.4em;
+.fullwidth > pre {
+  width: 90%;
 }
 
 /* ==========================================================================
@@ -192,14 +189,6 @@ p > code {
 .sidenote > code,
 .marginnote > code {
   font-size: 0.85em;
-}
-
-/* ==========================================================================
-   Fullwidth utility
-   ========================================================================== */
-
-.fullwidth > pre {
-  width: 90%;
 }
 
 /* ==========================================================================
@@ -284,7 +273,9 @@ blockquote[class^="markdown-alert"] {
     flex-shrink: 0;
     max-width: 45%;
 
-    svg { flex-shrink: 0; }
+    svg {
+      flex-shrink: 0;
+    }
 
     &:hover .pagination-title {
       text-decoration: underline;
@@ -412,15 +403,12 @@ div.math-display {
     max-width: 100%;
   }
 
-  // pre {
-  //   width: 100%;
-  // }
-
   .code-wrap {
     width: 100%;
   }
 
-  .fullwidth > .code-wrap {
+  .fullwidth > .code-wrap,
+  .fullwidth > pre {
     width: 100%;
   }
 }
@@ -442,6 +430,15 @@ div.math-display {
     border-radius: .3rem;
   }
 
-  .tag        { color: #666; &:hover { color: #aaa; } }
-  .tag-count  { color: #555; }
+  .tag {
+    color: #666;
+
+    &:hover {
+      color: #aaa;
+    }
+  }
+
+  .tag-count {
+    color: #555;
+  }
 }
