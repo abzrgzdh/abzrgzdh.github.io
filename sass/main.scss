@@ -7,7 +7,6 @@
   padding: 0;
   border: 0;
   font-size: 100%;
-  font: inherit;
   vertical-align: baseline;
 }
 
@@ -171,6 +170,8 @@ pre.z-code {
   min-width: 3ch;
   text-align: right;
   opacity: 0.8;
+  margin-right: 0.8em;
+  margin-left:-0.4em;
 }
 
 /* ==========================================================================
@@ -422,12 +423,6 @@ div.math-display {
   .fullwidth > .code-wrap {
     width: 100%;
   }
-
-  // .fullwidth > pre,
-  // .fullwidth > pre > code {
-  //   width: 100%;
-  //   margin-left: 0;
-  // }
 }
 
 /* ==========================================================================
