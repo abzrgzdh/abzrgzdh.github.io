@@ -52,7 +52,7 @@ pre {
   padding-bottom: 0.5em;
 
   @media (prefers-color-scheme: light) {
-    background-color: #f8f8f0 !important;
+    background-color: #efefe8 !important;
   }
 }
 
@@ -67,7 +67,7 @@ pre > code {
   line-height: 0;
 
   @media (prefers-color-scheme: light) {
-    background-color: #f8f8f0;
+    background-color: #efefe8;
   }
 }
 
@@ -436,14 +436,15 @@ div.math-display {
 
 @media (prefers-color-scheme: dark) {
   pre {
-    background-color: #0f0f08 !important;
+    background-color: #1f1f18 !important;
   }
 
   .sidenote > code,
   .marginnote > code,
   li > code,
   p > code {
-    background-color: #081000;
+    background-color: #282820;
+    border-radius: .3rem;
   }
 
   .tag        { color: #666; &:hover { color: #aaa; } }
