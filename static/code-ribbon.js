@@ -68,6 +68,31 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
 
+    pre.addEventListener('copy', (e) => {
+      const selection = window.getSelection();
+      if (!selection || selection.isCollapsed) return;
+
+      const range = selection.getRangeAt(0);
+      const lines = code.querySelectorAll('.giallo-l');
+
+      // If there are no giallo lines, let the browser handle it normally
+      if (lines.length === 0) return;
+
+      const text = Array.from(lines)
+        .filter(line => range.intersectsNode(line))
+        .map(line => {
+          const clone = line.cloneNode(true);
+          // Remove line number elements from the copy
+          clone.querySelectorAll('.giallo-ln').forEach(ln => ln.remove());
+          // Strip the trailing \n Giallo adds to each line's text content
+          return clone.textContent.replace(/\n$/, '');
+        })
+        .join('\n');
+
+      e.clipboardData.setData('text/plain', text);
+      e.preventDefault();
+    });
+
     ribbon.appendChild(langSpan);
     ribbon.appendChild(copyBtn);
     wrap.insertBefore(ribbon, pre);
