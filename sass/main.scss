@@ -51,6 +51,7 @@ pre {
   overflow-x: auto;
   overflow-y: hidden;
   padding: 0.5em 0;
+  background-color: #f8f8e0 !important;
 }
 
 pre > code {
@@ -228,6 +229,12 @@ blockquote[class^="markdown-alert"] {
   padding: 0.6rem 1rem;
   border-top: none;
   border-bottom: none;
+
+  ul,
+  ol {
+    margin-left: 0;
+    padding-left: 1.25rem;
+  }
 
   &::before {
     display: block;
@@ -409,7 +416,7 @@ div.math-display {
 
   .fullwidth > .code-wrap,
   .fullwidth > pre {
-    width: 100%;
+    width: 111%;
   }
 }
 
