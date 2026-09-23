@@ -3,6 +3,7 @@ title = "Build MPICH from source"
 description = "A quick guide to building, and installing MPICH from source, plus a clean way to switch between MPI implementations."
 draft = false
 date = "2026-07-03"
+updated = "2026-09-23"
 
 [taxonomies]
 tags = ["hpc", "mpi", "mpich"]
@@ -59,12 +60,34 @@ $ ./configure --prefix=/opt/mpich
 
 You could add any other flags here. You could run `./configure --help` to get a full list of all possible flags.
 Here are some useful ones:
+- `--enable-strict=all` or slightly less pedantic `--enable-strict=most`
 - `--disable-cxx` / `--disable-fortran`: skip C++ or Fortran bindings if you don't need them.
-- `--enable-fast=all,O3`: drop debug instrumentation for a production build.
+- For debug build:
+  - `--enable-g=most`, which enables debugging, along with static analyzers, etc.
+  - `--enable-fast=O0`. Even with the above debug flag being set, MPICH still uses the second level optimisation, i.e., `-O2`, in compilation. with this we disable any kind of optimisation.
+- For optimisation build:
+    - `--enable-g=none`,
+    - `--enable-fast=all,O3`, which drops debug instrumentation for a production build.
 - `CC=`, `CXX=`, `FC=`: pick a specific compiler, e.g. `CC=gcc-13 ./configure ...`.
 
 > [!TIP]
-> Run `./configure --help` for the full list of options.
+> Run `./configure --help` for the full list of options and their description.
+> Additionally, read this document in the MPICH repo located at `:/doc/wiki/source_code/Building_MPICH_For_Development.md`
+
+> [!TIP]
+> I usually install the debug and optimisation build in two separate directories of `/opt/mpich/{debug,opt}`.
+> Then, I use shell functions to set the necessary environment variables to switch to each installation on demand.
+> Something similar to the following:
+>
+> ```bash
+> mpich_debug() {
+>     export PATH="/opt/mpich/debug/bin:$PATH"
+> }
+>
+> mpich_opt() {
+>     export PATH="/opt/mpich/opt/bin:$PATH"
+> }
+> ```
 
 ## Build
 
