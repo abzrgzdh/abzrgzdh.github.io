@@ -12,7 +12,7 @@ tags = ["hpc", "mpi", "mpich"]
 math = false
 +++
 
-MPICH{% sidenote(id="sn-1") %}The CH part of the name was derived from "Chameleon", which was a portable parallel programming library developed by William Gropp, one of the founders of MPICH. (<a target="_blank" href=https://en.wikipedia.org/wiki/MPICH#History>wikipedia</a>){% end %} is one of the most widely used MPI implementations.
+MPICH{% <sidenote id="sn-1"> %}The CH part of the name was derived from "Chameleon", which was a portable parallel programming library developed by William Gropp, one of the founders of MPICH. (<a target="_blank" href=https://en.wikipedia.org/wiki/MPICH#History>wikipedia</a>){% </sidenote> %} is one of the most widely used MPI implementations.
 Package managers often ship an old version, or one built without the options you need, so you might want to build it from source to meet the requirements of your project.
 This guide covers that as well as setting up your shell so MPICH doesn't clash with other MPI installs like OpenMPI.
 
@@ -25,14 +25,14 @@ The steps should be pretty much the same on Linux, macOS, and BSD. I'll call out
 You need a C compiler and `make`.
 
 - **Linux**: install the usual toolchain, e.g. `build-essential` (Debian/Ubuntu).
-- **macOS**: run `xcode-select --install` to get `clang` and `make`{% sidenote(id="sn-2") %}I'm not entirely sure, but I think xcode cli tools provide GNU make, so you should be fine.{% end %}. Note `cc` is `clang` here, not GCC.
+- **macOS**: run `xcode-select --install` to get `clang` and `make`{% <sidenote id="sn-2"> %}I'm not entirely sure, but I think xcode cli tools provide GNU make, so you should be fine.{% </sidenote> %}. Note `cc` is `clang` here, not GCC.
 - **BSD**: base `make` is BSD make, not GNU make, which MPICH's build needs. Install GNU make (usually the `gmake` package) and use `gmake` instead of `make` below.
 
 
 ## Download and extract
 
 Grab the latest release tarball from the [MPICH downloads page](https://www.mpich.org/downloads/), then extract it:
-{% marginnote(id="mn-2") %}You could also verify the checksum/signature provided on the <a href="https://www.mpich.org/static/downloads/">downloads index page</a>.{% end %}
+{% <marginnote id="mn-2"> %}You could also verify the checksum/signature provided on the <a href="https://www.mpich.org/static/downloads/">downloads index page</a>.{% </marginnote> %}
 
 ```console
 $ curl -LO https://www.mpich.org/static/downloads/4.2.3/mpich-4.2.3.tar.gz
@@ -41,7 +41,7 @@ $ cd mpich-4.2.3
 ```
 
 <span></span>
-{% marginnote(id="mn-2.5", offset="-4.4em") %}<a target="_blank" href="https://en.wikipedia.org/wiki/Tar_(computing)#Tarbomb" style="text-decoration: none;">💣</a>{% end %}
+{% <marginnote id="mn-2.5" offset="-4.4em"> %}<a target="_blank" href="https://en.wikipedia.org/wiki/Tar_(computing)#Tarbomb" style="text-decoration: none;">💣</a>{% </marginnote> %}
 
 ## Configure
 
@@ -50,13 +50,13 @@ $ ./configure
 ```
 
 By default this installs to `/usr/local`. To _keep_ MPICH separate from other MPI implementations, you could set a custom prefix:
-{% marginnote(id="mn-3") %}<em>Prefix</em> is the base directory that everything gets installed into.{% end %}
+{% <marginnote id="mn-3"> %}<em>Prefix</em> is the base directory that everything gets installed into.{% </marginnote> %}
 
 ```console
 $ ./configure --prefix=/opt/mpich
 ```
 <span></span>
-{% marginnote(id="mn-4", offset="-3em") %}The rest of this guide uses <code>/opt/mpich</code> as prefix.{% end %}
+{% <marginnote id="mn-4" offset="-3em"> %}The rest of this guide uses <code>/opt/mpich</code> as prefix.{% </marginnote> %}
 
 You could add any other flags here. You could run `./configure --help` to get a full list of all possible flags.
 Here are some useful ones:
@@ -96,7 +96,7 @@ $ make 2>&1 | tee log.make
 ```
 
 <span></span>
-{% marginnote(id="mn-5", offset="-3em") %}Use <code>gmake</code> instead of <code>make</code> on BSD.{% end %}
+{% <marginnote id="mn-5" offset="-3em"> %}Use <code>gmake</code> instead of <code>make</code> on BSD.{% </marginnote> %}
 
 > [!TIP]
 > Speed things up with `make -j$(nproc)` on Linux or `make -j$(sysctl -n hw.ncpu)` on macOS/BSD.
@@ -108,7 +108,7 @@ $ sudo make install | tee log.install
 ```
 
 <span></span>
-{% marginnote(id="mn-6", offset="-3em") %}You don't need to use <code>sudo</code> if the current user owns the prefix directory.{% end %}
+{% <marginnote id="mn-6" offset="-3em"> %}You don't need to use <code>sudo</code> if the current user owns the prefix directory.{% </marginnote> %}
 
 > [!NOTE]
 > You could skip `sudo` entirely, by giving the user ownership over the prefix directory: `sudo mkdir -p /opt/mpich && sudo chown $USER /opt/mpich`; then you would re-run `make install` without `sudo`.
@@ -139,7 +139,7 @@ If both run cleanly, the install is good.
 ## Add it to your shell
 
 The binaries aren't on your `PATH` yet:
-{% marginnote(id="mn-7") %}<code>make install</code> only copies stuff to the prefix directory; it does not tell the OS or the compilers where they could find MPICH binaries and libraries. We need to update certain shell environment variables so that the correct compiler is selected for execution and the correct library for linking.{% end %}
+{% <marginnote id="mn-7"> %}<code>make install</code> only copies stuff to the prefix directory; it does not tell the OS or the compilers where they could find MPICH binaries and libraries. We need to update certain shell environment variables so that the correct compiler is selected for execution and the correct library for linking.{% </marginnote> %}
 
 ```console
 $ export PATH="/opt/mpich/bin:$PATH"
@@ -182,7 +182,7 @@ deactivate_mpich() {
 ```
 
 <span></span>
-{% marginnote(id="mn-8", offset="-14em") %}zsh uses <code>PROMPT</code>, bash uses <code>PS1</code>; the script checks <code>$ZSH_VERSION</code> to set the right one. You could adapt it if you use fish or any other non-POSIX shells.{% end %}
+{% <marginnote id="mn-8" offset="-14em"> %}zsh uses <code>PROMPT</code>, bash uses <code>PS1</code>; the script checks <code>$ZSH_VERSION</code> to set the right one. You could adapt it if you use fish or any other non-POSIX shells.{% </marginnote> %}
 
 Activate it in any shell session with:
 
@@ -197,6 +197,6 @@ mpicc is /opt/homebrew/bin/mpicc
 ```
 
 <span></span>
-{% marginnote(id="mn-9", offset="-10.3em") %}If that's too much typing, you could add an alias to your config, like <code>mpich5</code>.{% end %}
+{% <marginnote id="mn-9" offset="-10.3em"> %}If that's too much typing, you could add an alias to your config, like <code>mpich5</code>.{% </marginnote> %}
 <span></span>
-{% marginnote(id="mn-10", offset="-5.3em") %}<code>deactivate_mpich</code> restores <code>PATH</code> and the prompt to how they were before.{% end %}
+{% <marginnote id="mn-10" offset="-5.3em"> %}<code>deactivate_mpich</code> restores <code>PATH</code> and the prompt to how they were before.{% </marginnote> %}

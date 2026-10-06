@@ -12,37 +12,37 @@ math = true
 
 ## Epigraphs
 
-{% epigraph(author="Richard Feynman") %}
+{% <epigraph author="Richard Feynman"> %}
 The first principle is that you must not fool yourself — and you are the easiest person to fool.
-{% end %}
+{% </epigraph> %}
 
-{% epigraph() %}
+{% <epigraph > %}
 It is a capital mistake to theorize before one has data.
-{% end %}
+{% </epigraph> %}
 
-{% epigraph(author="Blaise Pascal", source="Lettres Provinciales") %}
+{% <epigraph author="Blaise Pascal" source="Lettres Provinciales"> %}
 I have made this longer than usual because I have not had time to make it shorter.
-{% end %}
+{% </epigraph> %}
 
 ---
 
 ## Quotes
 
-{% blockquote(author="Edward Tufte", source="The Visual Display of Quantitative Information") %}
+{% <blockquote author="Edward Tufte" source="The Visual Display of Quantitative Information"> %}
 Graphical excellence is the well-designed presentation of interesting data.
-{% end %}
+{% </blockquote> %}
 
 This is exactly what Orwell had in mind when he wrote:
 
-{% blockquote(author="George Orwell", source="Politics and the English Language") %}
+{% <blockquote author="George Orwell" source="Politics and the English Language"> %}
 Never use a long word where a short one will do.
-{% end %}
+{% </blockquote> %}
 
 And that principle applies equally to code.
 
 ## Side notes and margin notes
 
-This is the `simd` first post.{% sidenote(id="sn-1") %}You can use all your shortcodes here too.{% end %}
+This is the `simd` first post.{% <sidenote id="sn-1"> %}You can use all your shortcodes here too.{% </sidenote> %}
 
 ## Full-width
 
@@ -78,7 +78,7 @@ Full width code that does overflow.
 
 > [!IMPORTANT]
 > Something the reader really should not miss.
-> This is the `simd` first post.{% sidenote(id="sn-2") %}side note in alert/quote.{% end %}
+> This is the `simd` first post.{% <sidenote id="sn-2"> %}side note in alert/quote.{% </sidenote> %}
 
 > [!WARNING]
 > A warning about potential pitfalls.
@@ -89,7 +89,7 @@ Full width code that does overflow.
 
 ## Math support
 
-Various ways to write math:
+Various ways to write math $x$:
 
 $$
 x^2
@@ -97,21 +97,21 @@ x^2
 12\\,\rm{m}^2
 $$
 
-Inline math: {% math() %}\frac{1}{2}{% end %}
+Inline math: {% <math> %}\frac{1}{2}{% </math> %}
 
 Display math:
-{% dmath() %}
+{% <dmath> %}
 \int_0^\infty e^{-x^2} dx = \frac{\sqrt{\pi}}{2}
 12\,\rm{m}^2
-{% end %}
+{% </dmath> %}
 
 ...
 
-{% dmath() %}
+{% <dmath> %}
 x^2
 \frac{1}{x}
 12\,\rm{m}^2
-{% end %}
+{% </dmath> %}
 
 ...
 

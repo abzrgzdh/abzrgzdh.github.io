@@ -44,9 +44,9 @@ $ gh run list
 lists workflow runs in your repository.
 By default, it only returns 20 workflow runs.
 We can pass an extra `--limit <int>` flag to tell it list more.
-{% marginnote(id="mn-1") %}
+{% <marginnote id="mn-1"> %}
 You can check how many workflow runs exist by visiting the <em>Actions</em> tab of your GitHub repository in your browser.
-{% end %}
+{% </marginnote> %}
 Additionally, we have pass `--all` (or `-a`) to include disabled workflows.
 
 ```console
@@ -65,9 +65,9 @@ $ gh run list --json
 it will show use the various column names.
 Among them exists the `databaseId`, which is what we want.
 Issuing the following gives us a JSON output: a list of objects with only `databaseId` as key.
-{% marginnote(id="mn-2") %}
+{% <marginnote id="mn-2"> %}
 Simply add more <code>--json<field></code> pairs to get more columns of data.
-{% end %}
+{% </marginnote> %}
 
 
 ```console
@@ -85,11 +85,11 @@ $ gh run list --json databaseId
 
 Now we need to turn that JSON into a plain list of IDs.
 The easiest tool to pipe the JSON output into [`jq`](https://jqlang.org/).
-{% marginnote(id="mn-3") %}
+{% <marginnote id="mn-3"> %}
 <code>.</code> refers to the root JSON value;
 <code>[]</code> iterates over every element in the array; and
 <code>.databaseId</code> selects the <code>databaseId</code> property from each object.
-{% end %}
+{% </marginnote> %}
 
 ```console
 $ gh run list --json databaseId | jq '.[].databaseId'
@@ -100,9 +100,9 @@ $ gh run list --json databaseId | jq '.[].databaseId'
 ```
 
 Finally, we can go ahead and pipe the ids to `xargs` to get deleted one-by-one.
-{% marginnote(id="mn-4") %}
+{% <marginnote id="mn-4"> %}
 The <code>-n1</code> option tells <code>xargs</code> to invoke <code>gh run delete</code> once for each input line.
-{% end %}
+{% </marginnote> %}
 
 ```console
 $ gh run list --json databaseId | jq '.[].databaseId' | xargs -n1 gh run delete

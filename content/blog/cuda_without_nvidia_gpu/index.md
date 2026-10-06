@@ -18,14 +18,14 @@ Just head over to [godbolt.org](https://godbolt.org), choose a CUDA compiler, an
 
 This post, however, aims to set up a local CLI development environment.
 With it, you'll be able to code in the _comfort_ of your favorite terminal and editor.
-{% marginnote(id="mn-0", offset="-1.5em") %}
+{% <marginnote id="mn-0" offset="-1.5em"> %}
 The only catch is that there's a few milliseconds of delay between when you run the command and get your outputs, due to the network latency.
-{% end %}
+{% </marginnote> %}
 
 This setup is good for practicing CUDA syntax, checking that kernels and memory management compile correctly, and confirming small programs behave as expected, all without installing the CUDA toolkit or owning NVIDIA hardware.
 It's _not_ a good fit for serious performance benchmarking, since you're sharing remote hardware and timing won't be reliable, or for large, stateful projects, since each run starts _fresh_.
 
-To set this up locally, we'll use a small CLI that talks to Compiler Explorer and, if needed, a tool to flatten{% sidenote(id="") %} Since Compiler Explorer receives a single source file, projects that rely on local headers need to be flattened first.{% end %} multi-file projects into a single source file.
+To set this up locally, we'll use a small CLI that talks to Compiler Explorer and, if needed, a tool to flatten{% <sidenote id=""> %} Since Compiler Explorer receives a single source file, projects that rely on local headers need to be flattened first.{% </sidenote> %} multi-file projects into a single source file.
 I picked [`cexpl`](https://github.com/xfgusta/cexpl) and [`quom`](https://github.com/Viatorus/quom), respectively
 
 Set up a virtual environment and install `cexpl`. If your project spans multiple files, install `quom` as well.
@@ -54,10 +54,10 @@ int main() {
 ```
 
 <p style="margin-bottom: 0;">
-{% marginnote(id="", offset="-6.5em") %}
+{% <marginnote id="" offset="-6.5em"> %}
 This kernel just prints a message from 8 GPU threads.
 Also, in practice you should check the return value of <code>cudaDeviceSynchronize</code>.
-{% end %}
+{% </marginnote> %}
 </p>
 
 <hr style="border: none; margin: 0;">
@@ -77,11 +77,11 @@ $ cexpl --exec --skip-asm --lang cuda main.cu
 ```
 
 <span></span>
-{% marginnote(id="mn-1", offset="-3em") %}
+{% <marginnote id="mn-1" offset="-3em"> %}
 <code>--exec</code> runs the compiled program, not just compile it;
 <code>--skip-asm</code> hides the generated assembly output, so you only see program results;
 <code>--lang cuda</code> tells Compiler Explorer to treat the file as CUDA code.
-{% end %}
+{% </marginnote> %}
 
 After a short delay, you should see something like:
 
