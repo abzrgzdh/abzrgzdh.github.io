@@ -31,4 +31,3 @@ dark_theme = "github-dark-default"
 [extra]
 # Put all your custom variables here
 author = "Ali Bozorgzadeh"
-math = true
