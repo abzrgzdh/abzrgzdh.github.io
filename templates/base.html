@@ -23,19 +23,7 @@
 <body>
   {% block content %}{% endblock content %}
   {% block footer %}{% endblock footer %}
-
-  {% if page.extra.math %}
-  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
-  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
-    onload="renderMathInElement(document.body, {
-      delimiters: [
-        { left: '$$',  right: '$$',  display: true  },
-        { left: '\\(', right: '\\)', display: false },
-        { left: '\\[', right: '\\]', display: true  }
-      ],
-      throwOnError: false
-    });"></script>
-  {% endif %}
   <script src="{{ get_url(path='code-ribbon.js') }}" defer></script>
+  {% block script %}{% endblock script %}
 </body>
 </html>
