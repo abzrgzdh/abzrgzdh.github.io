@@ -1,0 +1,15 @@
+{% component marginnote(id="", offset="") %}{#
+#}<label for="mn-{{ id }}" class="margin-toggle">&#8853;</label>
+<input type="checkbox" id="mn-{{ id }}" class="margin-toggle"/>
+<span class="marginnote" {% if offset %}style="--note-offset: {{ offset }}"{% endif %}>{{ body | safe }}</span>{#
+#}{% endcomponent %}
+
+{#
+
+{% <marginnote id="..." offset="..." %}
+
+Some marginnote
+
+{% </marginnote> %}
+
+#}

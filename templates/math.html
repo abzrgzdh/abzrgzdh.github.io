@@ -1,0 +1,17 @@
+{# vim: ft=jinja
+
+Usage:
+
+  Inline math: {% math() %}\frac{1}{2}{% end %}
+
+#}
+
+{% component math() %}{#
+#}<span class="math">\({{ body }}\)</span>{#
+#}{% endcomponent %}
+
+{#
+
+{% <math> %}  Some inline math  {% </math> %}
+
+#}

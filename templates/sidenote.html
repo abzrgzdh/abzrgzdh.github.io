@@ -1,0 +1,15 @@
+{% component sidenote(id="", offset="") %}{#
+#}<label for="sn-{{ id }}" class="margin-toggle sidenote-number"></label>
+<input type="checkbox" id="sn-{{ id }}" class="margin-toggle"/>
+<span class="sidenote" {% if offset %}style="--note-offset: {{ offset }}"{% endif %}>{{ body | safe }}</span>{#
+#}{% endcomponent %}
+
+
+{#
+{% <sidenote id="..." offset="..." %}
+
+Some sidenotes
+
+{% </sidenote> %}
+
+#}
