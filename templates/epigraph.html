@@ -19,17 +19,16 @@ Usage:
 #}
 
 {% component epigraph(author="", source="") %}
-<div class="epigraph">
-  <blockquote>{#
-  #}{{ body | safe }}{#
-  #}{% if author or source %}{#
-  #}<footer> {% if author %}{{ author }}{% endif %}{#
-  #}{% if author and source %}, {% endif %}{#
-  #}{% if source %}{{ source }}{% endif %}{#
-  #} </footer>{#
-  #} {% endif %}
-  </blockquote>
-</div>
+<blockquote>
+{{ body | safe }}
+{% if author or source %}
+<footer>
+{% if author %}{{ author }}{% endif %}
+{% if author and source %}, {% endif %}
+{% if source %}{{ source }}{% endif %}
+</footer>
+{% endif %}
+</blockquote>
 {% endcomponent %}
 
 {#
