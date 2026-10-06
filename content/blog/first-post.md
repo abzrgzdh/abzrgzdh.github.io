@@ -97,7 +97,7 @@ x^2
 12\\,\rm{m}^2
 $$
 
-Inline math: {% <math> %}\frac{1}{2}{% </math> %}
+Inline math: {% <math > %}\frac{1}{2}{% </math> %} \\(\frac34\\)
 
 Display math:
 {% <dmath> %}

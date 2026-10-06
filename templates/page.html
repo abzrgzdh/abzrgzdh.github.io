@@ -2,23 +2,6 @@
 
 {% block title %}{{ page.title }} – {{ config.title }}{% endblock title %}
 
-{% block script %}
-
-  {% if page.extra.math %}
-  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
-  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"
-    onload="renderMathInElement(document.body, {
-      delimiters: [
-        { left: '$$',  right: '$$',  display: true  },
-        { left: '\\(', right: '\\)', display: false },
-        { left: '\\[', right: '\\]', display: true  }
-      ],
-      throwOnError: false
-    });"></script>
-  {% endif %}
-
-{% endblock script %}
-
 {% block content %}
 <article>
   <h1>{{ page.title }}</h1>
